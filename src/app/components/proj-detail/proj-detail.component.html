@@ -1,0 +1,127 @@
+<div class="flex w-full">
+    <div class="flex bg-gray-900 m-3 flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+        <div class="flex items-start justify-between">
+            <div class="text-lg text-gray-400 font-medium tracking-tight leading-6 truncate">Surveys</div>
+            <!-- <img class="w-8 h-8 ml-auto object-cover object-center rounded-full" src="https://images.unsplash.com/photo-1547592180-85f173990554?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="cuisine" /> -->
+            <button mat-icon-button [matMenuTriggerFor]="menu" style="color:white">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu xPosition="before" #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>add</mat-icon>
+                  <a data-bs-toggle="modal" data-bs-target="#create_new_survey" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">create new</a>
+                </button>
+                <button [matMenuTriggerFor]="surveys" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  <a [routerLink]="['/dashboard']" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">modify</a>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>delete_outline</mat-icon>
+                  <a [routerLink]="['/dashboard']" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">delete all</a>
+                </button>
+              </mat-menu>
+              <mat-menu #surveys="matMenu">
+                <button (click)="temp_form(prj.name)" *ngFor="let prj of selected_surveys; let i=index;" mat-menu-item>{{prj.name}}</button>
+              </mat-menu>
+        </div>
+        <div class="flex flex-col items-center mt-2">
+            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">{{dataservice.surveys}}</div>
+            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Created</div>
+            <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                <div class="text-md font-medium truncate">{{dataservice.surveys_date}}</div>
+                <!-- <div class="ml-1.5 text-lg font-semibold">13</div> -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex bg-gray-900 m-3 flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+        <div class="flex items-start justify-between">
+            <div class="text-lg text-gray-400 font-medium tracking-tight leading-6 truncate">Reports</div>
+            <!-- <img class="w-8 h-8 ml-auto object-cover object-center rounded-full" src="https://images.unsplash.com/photo-1547592180-85f173990554?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="cuisine" /> -->
+            <button mat-icon-button [matMenuTriggerFor]="menu" style="color:white">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu xPosition="before" #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>dialpad</mat-icon>
+                  <a [routerLink]="['/dashboard']" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">create new</a>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>voicemail</mat-icon>
+                  <a [routerLink]="['/dashboard']" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">modify</a>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>notifications_off</mat-icon>
+                  <a [routerLink]="['/dashboard']" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">delete all</a>
+                </button>
+              </mat-menu>
+        </div>
+        <div class="flex flex-col items-center mt-2">
+            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-white">{{reports}}</div>
+            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Created</div>
+            <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                <div class="text-md font-medium truncate">Completed:</div>
+                <div class="ml-1.5 text-lg font-semibold">13</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex bg-gray-900 m-3 flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+        <div class="flex items-start justify-between">
+            <div class="text-lg font-medium text-gray-400 tracking-tight leading-6 truncate">Calculations</div>
+            <!-- <img class="w-8 h-8 ml-auto object-cover object-center rounded-full" src="https://images.unsplash.com/photo-1547592180-85f173990554?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="cuisine" /> -->
+            <button mat-icon-button [matMenuTriggerFor]="menu" style="color:white">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu xPosition="before" #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>dialpad</mat-icon>
+                  <a [routerLink]="['/dashboard']" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">create new</a>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>voicemail</mat-icon>
+                  <a [routerLink]="['/dashboard']" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">modify</a>
+                </button>
+                <button mat-menu-item>
+                  <mat-icon>notifications_off</mat-icon>
+                  <a [routerLink]="['/dashboard']" class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">delete all</a>
+                </button>
+              </mat-menu>
+        </div>
+        <div class="flex flex-col items-center mt-2">
+            <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">{{calc}}</div>
+            <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Created</div>
+            <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                <div class="text-md font-medium truncate">Completed:</div>
+                <div class="ml-1.5 text-lg font-semibold">13</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<div class="modal fade" id="create_new_survey" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Please fill the form</h1>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+          <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Survey Name</label>
+              <input [(ngModel)]="dataservice.survey_data.name" #name type="text" id="exampleFormControlInput1" class="form-control" placeholder="eg. 2023 Grade 6 performance">
+            </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button data-bs-dismiss="modal" class="btn btn-secondary" >Cancel</button> -->
+        <button data-bs-dismiss="modal" (click)="create_survey()" class="btn btn-primary">Continue</button>
+        <!-- <button data-bs-dismiss="modal" (click)="createSurvey()" [disabled]="!dataservice.survey_data.name" class="btn btn-primary">Continue</button> -->
+      </div>
+    </div>
+  </div>
+</div>

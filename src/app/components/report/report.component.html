@@ -1,0 +1,25 @@
+
+<button class="btn btn-primary" (click)="create_chart()">create chart</button>
+<div class="flex">
+  <div class="w-100 grid gap-4 grid-cols-1 sm:grid-cols-2">
+    <div id="chart" *ngFor="let chart of charts; let i=index;" class="flex flex-col space-y-2 cursor-pointer rounded-md hover:bg-gray-900/80 hover:smooth-hover">
+        <apx-chart
+          [series]="chart.series"
+          [chart]="chart.chart"
+          [xaxis]="chart.xaxis"
+          [stroke]="chart.stroke"
+          [colors]="chart.colors"
+          [tooltip]="chart.tooltip"
+          [dataLabels]="chart.dataLabels"
+          [legend]="chart.legend"
+          [markers]="chart.markers"
+          [grid]="chart.grid"
+          [yaxis]="chart.yaxis"
+          [title]="chart.title"
+          [plotOptions]="chart.plotOptions"
+        ></apx-chart>
+      </div>
+  </div>
+</div>
+
+ 
