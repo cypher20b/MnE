@@ -22,7 +22,7 @@ export class SurveyFormComponent implements OnInit{
     private router:Router,
     private formBuilder:FormBuilder
     ){}
-  onRadioSelect(question:any, i:any, data:any){
+  onRadioSelect(question:any, event:any, data:any){
     console.log(question)
     // this.radioSelected = ''
     // this.survey.questions[i].posible_answers[i] = this.radioSelected
@@ -30,6 +30,7 @@ export class SurveyFormComponent implements OnInit{
     for (let i = 0; i < this.answersForm.length; i++) {
       if (this.answersForm[i].question_text === question.question_text) {
         this.answersForm[i].answer = data
+        // console.log(event)
         console.log(this.answersForm[i])
       }
     }

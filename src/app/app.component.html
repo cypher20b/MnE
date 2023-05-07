@@ -1,4 +1,4 @@
-<nav class="bg-gray-800 absolute top-0 left-0 z-10 w-100">
+<!-- <nav class="bg-gray-800 absolute top-0 left-0 z-10 w-100">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
@@ -23,16 +23,7 @@
                 </button>
               </div>
 
-              <!-- <mat-menu xPosition="before" #menu="matMenu" tabindex="-1" class="rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" aria-labelledby="user-menu-button"> -->
-                <!-- <a mat-menu-item class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-
-                <a mat-menu-item class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-
-                <a mat-menu-item class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a> -->
-
-                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" style="color:white">
-                  <mat-icon>more_vert</mat-icon>
-                </button> -->
+             
                 <mat-menu xPosition="before" #menu="matMenu">
                   <button mat-menu-item>
                     <mat-icon>account_circle</mat-icon>
@@ -47,7 +38,7 @@
                     <a class="block text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Sign out</a>
                   </button>
                 </mat-menu> 
-              <!-- </mat-menu> -->
+
             </div>
           </div>
         </div>
@@ -60,7 +51,7 @@
 
     
     <div class="flex h-full" style="padding-top: 58px;">
-        <!-- Sidebar -->
+
     <div class="bg-gray-800 sm:block hidden">
         <div class="">
           <ul class="flex flex-col py-4 space-y-1">
@@ -118,11 +109,12 @@
           </ul>
         </div>
       </div>
-      <!-- ./Sidebar -->
     
     <div style="overflow-y: scroll; padding-top: 5px;" class="flex w-100">
         <router-outlet></router-outlet>
     </div>
     </div>
   </div>
-  
+   -->
+
+   <router-outlet></router-outlet>

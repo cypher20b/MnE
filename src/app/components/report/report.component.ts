@@ -373,5 +373,6 @@ export class ReportComponent implements OnInit{
     this.charts.push(this.monochromepieChart)
   }
   ngOnInit(): void {
+    this.create_chart()
   }
 }

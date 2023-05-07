@@ -8,6 +8,8 @@ import { ProjFactoryComponent } from './components/proj-factory/proj-factory.com
 import { ReportComponent } from './components/report/report.component';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
 import { SurveyComponent } from './components/survey/survey.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
 
 const routes: Routes = [
   {path:'survey', component:SurveyComponent},
@@ -18,7 +20,10 @@ const routes: Routes = [
   {path:'proj_detail/:id/analysis', component:ProjAnalyticsComponent},
   {path:'report', component:ReportComponent},
   {path:'model/:id', component:ModelFactoryComponent},
-  {path:'**', redirectTo: '/proj', pathMatch: 'full'}
+  // {path:'**', redirectTo: '/proj', pathMatch: 'full'},
+  {path:'login', component:LoginComponent},
+  {path:'signup', component:SignupComponent},
+
 ];
 
 @NgModule({

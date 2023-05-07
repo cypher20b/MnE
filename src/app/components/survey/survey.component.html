@@ -1,3 +1,252 @@
-<div class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-  </div>
+<div class="container">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
+    <mat-tab label="BUILDER">
+        <mat-card class="mt-4 mat-elevation-z4">
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Form name</mat-label>
+            <input class="" matInput placeholder="ONE D ONE F SURVERY" [(ngModel)]="data.surveyTitle" [formControl]="surveyName" required>
+            <mat-error *ngIf="surveyName.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Description</mat-label>
+            <textarea rows="2" matInput placeholder="Some description" [(ngModel)]="data.surveyDescription" [formControl]="description"></textarea>
+          </mat-form-field>
+          </mat-card>
+        <!-- pages and elements -->
+        <mat-card *ngFor="let page of data.pages; let i=index" style="margin-top: 40px;" class="card mat-elevation-z4 w-100">
+          <div class="d-flex">
+            <div style="background-color: #eee; display: flex;">
+              <label for="" style="padding-top: 10px;">page {{i+1}} of {{data.pages.length}}</label>
+              <section class="example-section">
+                <mat-checkbox style="font-size: 12px;" class="example-margin" [(ngModel)]="named">named</mat-checkbox>
+              </section>
+            </div>
+            <div style="background-color: #eee; margin-left: auto;">
+              <button mat-icon-button>
+                <mat-icon>
+                  close_fullscreen
+                  </mat-icon>
+              </button>
+              <button (click)="deletePage(i)" mat-icon-button>
+                <mat-icon>
+                  delete
+                  </mat-icon>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="named" class="row">
+            <mat-form-field class="col-12" appearance="fill">
+              <mat-label>Page Name</mat-label>
+              <input class="" matInput placeholder="pat@example.com" [(ngModel)]="pageName" required>
+              <mat-error *ngIf="surveyName.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-12" appearance="fill">
+              <mat-label>Page Description</mat-label>
+              <textarea rows="2" matInput placeholder="Some description" [(ngModel)]="pageDescription"></textarea>
+            </mat-form-field>
+          </div>
+          <mat-card-title *ngIf="!data.pages.length">Empty ELEMENT</mat-card-title>
+          <!-- elements of a page -->
+          <div *ngFor="let element of page.elements">
+            <div class="row p-2" *ngIf="element?.type ==='question'">
+              <!-- radio -->
+                <div *ngIf="element.question.type === 'radio'" class="col-12">
+                <label id="example-radio-group-label"><strong>{{element.question.text}} <span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <mat-radio-group
+                  aria-labelledby="example-radio-group-label"
+                  class="example-radio-group">
+                 <div *ngFor="let ans of element.question.OfferedAnswers">
+                  <mat-radio-button class="example-radio-button" [value]="ans.Answer">
+                    {{ans.Answer}}
+                  </mat-radio-button>
+                  <input style="margin-left: 3rem;" *ngIf="ans.otherOption === true" type="text" class="form-control" placeholder="type here ...">
+                 </div>
+                </mat-radio-group>
+              </div>
+              <!-- checkbox -->
+              <div *ngIf="element.question.type === 'checkbox'" class="col-12">
+                <label id="example-radio-group-label"><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <div class=""  *ngFor="let ans of element.question.OfferedAnswers">
+                  <mat-checkbox class="example-radio-group" [value]="ans.Answer">{{ans.Answer}}</mat-checkbox>
+                  <input style="margin-left: 3rem;" *ngIf="ans.otherOption === true" type="text" class="form-control" placeholder="type here ...">
+                </div>
+              </div>
+              <!-- text -->
+              <div *ngIf="element.question.type === 'text'" class="col-12">
+                <label style="display: flex; padding-bottom: 10px;"><strong>{{element.question.text}} <span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <!-- <mat-form-field class=""> -->
+                  <input class="form-control" style="width: 50%;" placeholder="Type answer here">
+                <!-- </mat-form-field> -->
+              </div>
+              <!-- number -->
+              <div *ngIf="element.question.type === 'number'" class="col-12">
+                <label style="display: flex; padding-bottom: 10px;"><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <!-- <mat-form-field class=""> -->
+                  <input type="number" class="form-control" style="width: 50%;" placeholder="Type answer here">
+                <!-- </mat-form-field> -->
+              </div>
+  
+              <!-- email -->
+              <div *ngIf="element.question.type === 'email'" class="col-12">
+                <label style="display: flex; padding-bottom: 10px;"><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <!-- <mat-form-field class=""> -->
+                  <input type="email" class="form-control" style="width: 50%;" placeholder="example@email.com">
+                <!-- </mat-form-field> -->
+              </div>
+  
+              <!-- url -->
+              <div *ngIf="element.question.type === 'url'" class="col-12">
+                <label style="display: flex; padding-bottom: 10px;"><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <!-- <mat-form-field class=""> -->
+                  <input type="url" class="form-control" style="width: 50%;" placeholder="https://www.example.com">
+                <!-- </mat-form-field> -->
+              </div>
+  
+              <!-- date -->
+              <div *ngIf="element.question.type === 'date'" class="col-12">
+                <label style="display: flex; padding-bottom: 10px;"><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <!-- <mat-form-field class=""> -->
+                  <input class="form-control" type="date" style="width: 50%;" placeholder="Type answer here">
+                <!-- </mat-form-field> -->
+              </div>
+              <!-- date-->
+  
+  
+                <!-- time -->
+              <div *ngIf="element.question.type === 'time'" class="col-12">
+                <label style="display: flex; padding-bottom: 10px;"><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <!-- <mat-form-field class=""> -->
+                  <input class="form-control" type="time" style="width: 50%;" placeholder="Type answer here">
+                <!-- </mat-form-field> -->
+              </div>
+              
+              <!-- range -->
+              <div *ngIf="element.question.type === 'range'" class="col-12">
+                <label style="display: flex; padding-bottom: 10px;"><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <mat-card class="example-result-card">
+                  <mat-card-content>
+                    <div class="example-label-container">
+                      <label id="example-name-label" class="example-name-label">Value</label>
+                      <label class="example-value-label" style="margin-left: 10px;">{{element.question.OfferedAnswers[0].value}}</label>
+                    </div>
+                    <div style="display: flex;">
+                      <mat-slider
+                      class="example-margin"
+                      [max]="element.question.OfferedAnswers[0].max"
+                      [min]="element.question.OfferedAnswers[0].min"
+                      [step]="element.question.OfferedAnswers[0].step"
+                      [discrete]="element.question.OfferedAnswers[0].thumbLabel"
+                      showTickMarks="false">
+                      <input matSliderThumb [(ngModel)]="element.question.OfferedAnswers[0].value">
+                    </mat-slider>
+                   </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+  
+  
+              <!-- textarea -->
+              <div *ngIf="element.question.type === 'textarea'" class="col-12">
+                <label style="display: flex; padding-bottom: 10px;"><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <!-- <mat-form-field class=""> -->
+                  <textarea class="form-control" style="width: 50%;" placeholder="Type answer here" rows="3"></textarea>
+                <!-- </mat-form-field> -->
+              </div>
+              <!-- select -->
+              <div *ngIf="element.question.type === 'select'" class="col-12">
+                <label><strong>{{element.question.text}}<span style="color: red;" *ngIf="element.question.required">*</span></strong></label>
+                <select class="form-select" style="width: 50%;">
+                  <option selected>Select One</option>
+                  <option  *ngFor="let ans of element.question.OfferedAnswers" [value]="ans">{{ans.Answer}}</option>
+                </select>
+              </div>
+            </div>
+            <!-- display a paragraph -->
+            <div *ngIf="element?.type ==='paragraph'" class="col-12" style="display: flex; justify-content: center; flex-direction: column; text-align: center;">
+              <hr>
+              <label style="padding-bottom: 10px;"><strong>{{element.paragraph.title}}</strong></label>
+              <label style="padding-bottom: 10px;">{{element.paragraph.text}}</label>
+              <hr>
+            </div>
+            <!-- display an image -->
+            <div *ngIf="element?.type ==='image'" class="col-12" style="display: flex; align-items: center; flex-direction: column; text-align: center;">
+              <hr>
+              <label style="padding-bottom: 10px;"><strong>{{element.image.text}}</strong></label>
+              <img style="width: 80%;" [src]="element.image.imageBlob">
+              <hr>
+            </div>
+          </div>
+
+
+          
+          <div class="mt-2 mb-1" style="display: flex; justify-content: center;">
+            <button style="width: fit-content;" [matMenuTriggerFor]="menu" mat-raised-button color="primary">ADD ELEMENT</button>
+            <mat-menu #menu="matMenu">
+              <button (click)="addElement(i, 'question')" mat-menu-item><span mat-button>question</span> 
+                <mat-icon>question_mark</mat-icon>
+              </button>
+              <button (click)="addElement(i, 'image')" mat-menu-item>
+                <span mat-button>Image</span>
+                <mat-icon>add_a_photo</mat-icon>
+              </button>
+              <button (click)="addElement(i, 'paragraph')" mat-menu-item><span mat-button>paragraph</span>
+                <mat-icon>edit_note</mat-icon>
+              </button>
+            </mat-menu>
+          </div>
+         
+          <div class="d-flex p2">
+            <label class="text-center" style="margin-right: 15px;" for="">After page {{i+1}} go to</label>
+            <select class="form-select-sm" aria-label="Default select example">
+              <option selected>Go to next Page</option>
+              <option *ngFor="let p of data.pages;let j=index" value="1"><span *ngIf="i!==j">{{j}}</span></option>
+            </select>
+          </div>
+          </mat-card>
+
+          <!-- pagination and button -->
+          <div style="display:flex; margin-top: 20px; justify-content: space-evenly; background-color: rgb(202, 202, 202); flex-wrap: nowrap;">
+            <mat-paginator #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="length"
+               [pageSize]="pageSize"
+               [disabled]="disabled"
+               [showFirstLastButtons]="showFirstLastButtons"
+               [pageSizeOptions]="showPageSizeOptions ? pageSizeOptions : []"
+               [hidePageSize]="hidePageSize"
+               [pageIndex]="pageIndex"
+               aria-label="Select page">
+            </mat-paginator>
+            <div class="row " style="width: max-content; flex-wrap: nowrap;">
+              <button (click)="createPage()" class="col-sm-6" style="width: max-content; margin-top: 10px;" mat-button><mat-icon>add</mat-icon>ADD PAGE</button>
+            </div>
+          </div>
+
+          <!-- confirmation page -->
+          <mat-card style="margin-top: 40px;" class="card mat-elevation-z4 w-100">
+            <mat-card-title>
+              Finish
+            </mat-card-title>
+            <mat-form-field class="" appearance="fill">
+              <textarea rows="2" matInput placeholder="Custom confirmation message"></textarea>
+            </mat-form-field>
+            </mat-card>
+    </mat-tab>
+
+
+
+
+    
+    <mat-tab label="VIEWER">
+        
+    </mat-tab>
+    <mat-tab label="Third">
+        Content 3
+    </mat-tab>
+</mat-tab-group>
+</div>
+
+
+  
+<!-- <button (click)="createEvent()">add</button> -->

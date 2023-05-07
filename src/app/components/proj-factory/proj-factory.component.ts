@@ -17,13 +17,12 @@ export class ProjFactoryComponent implements OnInit {
       console.log(res);
       // this.dataservice.projects_array.push(this.dataservice.new_projects_array)
       this.dataservice.new_projects_array = {name: '',createdAt:'',updatedAt:'', description:'', data:[]}
-      
+      this.ngOnInit()
     })
   }
   editproj(id:any){
     console.log(this.dataservice.projects_array)
         this.router.navigate(['proj_detail',id])
-
   }
   mynamefnx(name:any){
     console.log(name)

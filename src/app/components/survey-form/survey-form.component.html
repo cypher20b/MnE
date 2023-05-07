@@ -22,7 +22,7 @@
       </div>
       <mat-radio-group class="" *ngSwitchCase="'radio'" aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="radioSelected">
         <p>
-          <mat-radio-button (click)="onRadioSelect(question, ans_i, choice)" class="example-radio-button" *ngFor="let choice of survey.questions[i].posible_answers; let ans_i=index" [value]="answersForm[i].answer">
+          <mat-radio-button (click)="onRadioSelect(question, $event, choice)" class="example-radio-button" *ngFor="let choice of survey.questions[i].posible_answers; let ans_i=index" [value]="answersForm[i].answer">
             {{choice}}
           </mat-radio-button>
         </p>

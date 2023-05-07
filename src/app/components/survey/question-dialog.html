@@ -1,0 +1,199 @@
+
+<!-- question dialog -->
+<h2 *ngIf="data.elementType === 'question'" mat-dialog-title>Add New Question</h2>
+<mat-dialog-content *ngIf="data.elementType === 'question'" class="mat-typography">
+  <div mat-dialog-content class="row">
+    <mat-form-field class="col-12">
+      <input matInput [(ngModel)]="data.question" placeholder="question text *">
+    </mat-form-field>
+    <mat-form-field class="col-12">
+      <mat-select [(ngModel)]="data.type" placeholder="Question Type">
+        <mat-option *ngFor="let type of questionTypes" [value]="type.value">
+          {{type.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <section class="row g-3" style="display: flex; justify-content: center;">
+      <mat-checkbox [(ngModel)]="data.required" class="example-margin">Required</mat-checkbox>
+      <mat-checkbox (ngModelChange)="logOtherOptions()" *ngIf="data.type === 'radio'" [(ngModel)]="otherOption" class="example-margin">add <i>OTHER</i> option</mat-checkbox>
+    </section>
+  </div>
+  
+  
+  
+<!-- if question is a radio type -->
+<div *ngIf="data.type === 'radio'">
+  <div class="row g-3" style="display: flex; justify-content: center;">
+    <div class="col-auto">
+      <input type="text" [(ngModel)]="answerTextBox" #new_answer (keyup.enter)="add_answer(new_answer.value)" class="form-control" id="inputPassword2" placeholder="Type your answer here...">
+    </div>
+  </div>
+  <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group">
+    <mat-radio-button class="example-radio-button" *ngFor="let ans of this.data.OfferedAnswers; let i =index" [value]="ans.Answer">
+      {{ans.Answer}} <button class="btn-close remove-btn" (click)="pop_option(i)" aria-label="Close"></button>
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<!-- if question is a checkbox type -->
+<div *ngIf="data.type === 'checkbox'">
+  <div class="row g-3" style="display: flex; justify-content: center;">
+    <div class="col-auto">
+      <input type="text" [(ngModel)]="answerTextBox" #new_answer (keyup.enter)="add_answer(new_answer.value)" class="form-control" id="inputPassword2" placeholder="Type your answer here...">
+    </div>
+  </div>
+  <mat-checkbox  *ngFor="let ans of this.data.OfferedAnswers; let i =index" [value]="ans.Answer">
+    {{ans.Answer}} <button class="btn-close remove-btn" (click)="pop_option(i)" aria-label="Close"></button>
+    </mat-checkbox>
+</div>
+
+<!-- if question is a text type -->
+<div *ngIf="data.type === 'text'">
+  <mat-form-field class="example-full-width">
+    <input matInput disabled placeholder="Answer will be entered here..." >
+  </mat-form-field>
+</div>
+
+<!-- if question is an email type -->
+<div *ngIf="data.type === 'email'">
+  <mat-form-field class="example-full-width">
+    <input type="email" matInput disabled placeholder="Answer will be entered here..." >
+  </mat-form-field>
+</div>
+
+<!-- if question is an email type -->
+<div *ngIf="data.type === 'url'">
+  <mat-form-field class="example-full-width">
+    <input type="url" matInput disabled placeholder="Answer will be entered here..." >
+  </mat-form-field>
+</div>
+
+<!-- if question is a time type -->
+<div *ngIf="data.type === 'time'">
+  <mat-form-field class="example-full-width">
+    <input type="time" matInput disabled placeholder="Answer will be entered here..." >
+  </mat-form-field>
+</div>
+
+<!-- if question is a number type -->
+<div *ngIf="data.type === 'number'">
+  <mat-form-field class="example-full-width">
+    <input type="number" matInput disabled placeholder="Answer will be entered here..." >
+  </mat-form-field>
+</div>
+<!-- if question is a textarea type -->
+<div *ngIf="data.type === 'textarea'">
+  <mat-form-field class="example-full-width">
+    <textarea matInput disabled placeholder="Answer will be entered here..." ></textarea>
+  </mat-form-field>
+</div>
+
+<!-- if question is a range type -->
+<mat-card *ngIf="data.type === 'range'">
+  <mat-card-content>
+    <h2 class="example-h2">Range configuration</h2>
+
+    <section class="row">
+      <mat-form-field class="col-md-6" appearance="fill">
+        <mat-label>Value</mat-label>
+        <input matInput type="number" [(ngModel)]="value">
+      </mat-form-field>
+      <mat-form-field class="col-md-6" appearance="fill">
+        <mat-label>Min value</mat-label>
+        <input matInput type="number" [(ngModel)]="min">
+      </mat-form-field>
+      <mat-form-field class="col-md-6" appearance="fill">
+        <mat-label>Max value</mat-label>
+        <input matInput type="number" [(ngModel)]="max">
+      </mat-form-field>
+      <mat-form-field class="col-md-6" appearance="fill">
+        <mat-label>Step size</mat-label>
+        <input matInput type="number" [(ngModel)]="step">
+      </mat-form-field>
+    </section>
+
+    <section class="example-section">
+      <mat-checkbox [(ngModel)]="thumbLabel">Show thumb label</mat-checkbox>
+    </section>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="data.type === 'range'" class="example-result-card">
+  <mat-card-content>
+    <h2>Result</h2>
+
+    <div class="example-label-container">
+      <label id="example-name-label" class="example-name-label">Value</label>
+      <label class="example-value-label">{{value}}</label>
+    </div>
+    <div style="display: flex;">
+      <mat-slider
+      class="example-margin"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [discrete]="thumbLabel"
+      showTickMarks="false">
+      <input matSliderThumb [(ngModel)]="value">
+    </mat-slider>
+    <button (click)="add_answer('new_answer.value_xyz123abc')" mat-raised-button color="primary" style="margin-left: auto;">Save config</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+<!-- if question is a select type -->
+<div *ngIf="data.type === 'select'">
+  <div class="row g-3" style="display: flex; justify-content: center;">
+    <div class="col-auto">
+      <input type="text" [(ngModel)]="answerTextBox" #new_answer (keyup.enter)="add_answer(new_answer.value)" class="form-control" id="inputPassword2" placeholder="Type your answer here...">
+    </div>
+  </div>
+  <select class="form-select" aria-label="Default select example">
+    <option selected>Open this select menu</option>
+    <option *ngFor="let ans of data.OfferedAnswers, let i = index" [value]="ans">{{ans.Answer}}</option>
+  </select>
+</div>
+</mat-dialog-content>
+
+
+<!-- paragraph dialog -->
+<h2 *ngIf="data.elementType === 'paragraph'" mat-dialog-title>Add New Paragraph</h2>
+<mat-dialog-content *ngIf="data.elementType === 'paragraph'" class="mat-typography">
+  <div mat-dialog-content class="row">
+    <mat-form-field class="col-12">
+      <input matInput [(ngModel)]="data.paragraph.title" placeholder="paragraph title">
+    </mat-form-field>
+    <mat-form-field class="col-12">
+        <textarea matInput [(ngModel)]="data.paragraph.text" placeholder="Enter paragraph text..." ></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<!-- Image dialog -->
+<h2 *ngIf="data.elementType === 'image'" mat-dialog-title>Add New Image</h2>
+<mat-dialog-content *ngIf="data.elementType === 'image'" class="mat-typography">
+  <div mat-dialog-content class="row">
+    <input *ngIf="!data.image.imageBlob" type="file" name="" (change)="selectImage($event)" id="imgInp">
+    <mat-form-field class="col-12">
+        <textarea matInput [(ngModel)]="data.image.text" placeholder="Enter Image description..." ></textarea>
+    </mat-form-field>
+
+    <div *ngIf="data.image.imageBlob" class="contain">
+      <img [src]="data.image.imageBlob" class="image">
+      <div class="middle">
+        <button (click)="deleteImage()" mat-fab color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<!-- action buttons -->
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close="false">Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="data" cdkFocusInitial colo>Add</button>
+</mat-dialog-actions>
