@@ -9,7 +9,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialo
 @Component({
   selector: 'app-root',
   templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.css']
+  styleUrls: ['./survey.component.scss']
 })
 
 export class SurveyComponent {
@@ -191,7 +191,7 @@ interface dialogData{
 @Component({
 selector: 'question-dialog',
 templateUrl: 'question-dialog.html',
-styleUrls: ['./survey.component.css']
+styleUrls: ['./survey.component.scss']
 })
 
 export class QuestionDialog {

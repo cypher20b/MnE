@@ -1,29 +1,6 @@
 <div class="bg-login">
 	<!--wrapper-->
 	<div class="wrapper">
-		<header class="login-header shadow">
-			<nav class="navbar navbar-expand-lg navbar-light bg-white rounded fixed-top rounded-0 shadow-sm">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="#">
-						<img src="assets/images/logo-img.png" width="140" alt="" />
-					</a>
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarSupportedContent1">
-						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-							<li class="nav-item"> <a class="nav-link active" aria-current="page" href="#"><i class='bx bx-home-alt me-1'></i>Home</a>
-							</li>
-							<li class="nav-item"> <a class="nav-link" href="#"><i class='bx bx-user me-1'></i>About</a>
-							</li>
-							<li class="nav-item"> <a class="nav-link" href="#"><i class='bx bx-category-alt me-1'></i>Features</a>
-							</li>
-							<li class="nav-item"> <a class="nav-link" href="#"><i class='bx bx-microphone me-1'></i>Contact</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</header>
 		<div class="d-flex align-items-center justify-content-center my-5">
 			<div class="container">
 				<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2">
@@ -33,21 +10,12 @@
 								<div class="border p-4 rounded">
 									<div class="text-center">
 										<h3 class="">Sign Up</h3>
-										<p>Already have an account? <a href="JavaScript:;" (click)="onSignIn()">Sign in here</a>
-										</p>
 									</div>
-									<div class="d-grid">
-										<a class="btn my-4 shadow-sm btn-white" href="#" (click)="$event.preventDefault()"> <span class="d-flex justify-content-center align-items-center">
-											<img class="me-2" src="assets/images/icons/search.svg" width="16" alt="Image Description">
-											<span>Sign Up with Google</span>
-											</span>
-										</a> <a href="#" (click)="$event.preventDefault()" class="btn btn-facebook"><i class="bx bxl-facebook"></i>Sign Up with Facebook</a>
-									</div>
-									<div class="login-separater text-center mb-4"> <span>OR SIGN UP WITH EMAIL</span>
+									<div class="login-separater text-center mb-4">
 										<hr/>
 									</div>
 									<div class="form-body">
-										<form class="row g-3">
+										<div class="row g-3">
 											<div class="col-sm-6">
 												<label for="inputFirstName" class="form-label">First Name</label>
 												<input type="email" class="form-control" id="inputFirstName" placeholder="Jhon">
@@ -83,10 +51,20 @@
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-primary"><i class='bx bx-user'></i>Sign up</button>
+													<button (click)="onSignup()" type="submit" class="btn btn-primary"><i class='bx bx-user'></i>Sign up</button>
 												</div>
 											</div>
-										</form>
+										</div>
+									</div>
+									<p>Already have an account? <a (click)="onSignIn()">Sign in here</a>
+									</p>
+
+									<div class="d-grid">
+										<a class="btn my-4 shadow-sm btn-white" href="#" (click)="$event.preventDefault()"> <span class="d-flex justify-content-center align-items-center">
+											<img class="me-2" src="assets/images/icons/search.svg" width="16" alt="Image Description">
+											<span>Sign Up with Google</span>
+											</span>
+										</a> 
 									</div>
 								</div>
 							</div>

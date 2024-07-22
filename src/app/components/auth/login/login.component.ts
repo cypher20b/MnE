@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LoginCredentials } from 'src/app/interfaces/login';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loginDetails:any
+  loginDetails:LoginCredentials={email:'', password:''}
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   // On Forgotpassword link click
@@ -15,9 +16,9 @@ export class LoginComponent {
     this.router.navigate(['forgot-password'], { relativeTo: this.route.parent });
   }
   login(){
+    this.router.navigate(['dashboard']);
     console.log(this.loginDetails)
-    this.router.navigate(['signup'], { relativeTo: this.route.parent });
-    Math.round()
+    // Math.round()
   }
   // On Signup link click
   onSignup() {

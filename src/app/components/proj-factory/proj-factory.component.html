@@ -1,23 +1,17 @@
-<!-- <div data-bs-toggle="modal" data-bs-target="#create_new_proj" class="card m-2" style="width: 17rem;">
-    <div class="card-body text-center">
-      <h5 class="card-title">+ Create New Project</h5>
-    </div>
-  </div>
-
-<br> -->
-<!-- 
-<div class="row m-1">
-    <div *ngFor="let prj of dataservice.projects_array; let i=index;" class=" col-sm-6 col-md-3 col-lg-2 p-0">
+<div class="d-flex">
+    <div *ngFor="let prj of dataservice.projectsArray; let i=index;" class="">
         <div class="card m-1 mt-0">
             <div class="card-body text-center" style="height: 11.8rem;">
-                <h5 class="card-title">{{prj.name}}</h5>
+                <h5 (click)="editProj(i)" data-bs-toggle="modal" data-bs-target="#create_new_proj" class="card-title">{{prj.name}}</h5>
                 <p class="card-text">{{prj.description}}</p>
-            <a href="#" class="btn btn-primary">View</a>
+                <a (click)="openProj(i)" class="btn btn-primary">View</a>
             </div>
         </div>
     </div>
-</div> -->
-
+</div>
+<div data-bs-toggle="modal" data-bs-target="#create_new_proj">
+  <a >Create New Project</a>
+</div>
 
   
   <!-- Modal -->
@@ -31,38 +25,17 @@
         <div class="modal-body">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Project Name</label>
-                <input [(ngModel)]="dataservice.new_projects_array.name" #name type="text" id="exampleFormControlInput1" class="form-control" placeholder="eg. 2023 Grade 6 performance">
+                <input [(ngModel)]="project.name" type="text" id="exampleFormControlInput1" class="form-control" placeholder="eg. 2023 Grade 6 performance">
               </div>
               <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                <textarea [(ngModel)]="dataservice.new_projects_array.description" class="form-control" id="exampleFormControlTextarea1" placeholder="brief description of the project" rows="3"></textarea>
+                <textarea [(ngModel)]="project.description" class="form-control" id="exampleFormControlTextarea1" placeholder="brief description of the project" rows="3"></textarea>
               </div>
         </div>
         <div class="modal-footer">
           <button data-bs-dismiss="modal" class="btn btn-secondary" >Cancel</button>
-          <button data-bs-dismiss="modal" (click)="createproj()" [disabled]="!dataservice.new_projects_array.name" class="btn btn-primary">Continue</button>
+          <button data-bs-dismiss="modal" (click)="!updateBool? createProj():updateProject()" class="btn btn-primary">{{!updateBool? 'Continue':'Update'}}</button>
         </div>
       </div>
     </div>
   </div>
-
-
-<div class="flex">
-  <div style="height: 300px;" class="w-100 grid m-3 gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-    <div data-bs-toggle="modal" data-bs-target="#create_new_proj" class="group bg-gray-900/30 py-20 px-4 flex flex-col space-y-2 items-center cursor-pointer rounded-md hover:bg-gray-900/40 hover:smooth-hover">
-      <a class="bg-gray-900/70 text-white/50 group-hover:text-white group-hover:smooth-hover flex w-20 h-20 rounded-full items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        </svg>
-      </a>
-      <a class="text-white/50 group-hover:text-white group-hover:smooth-hover text-center">Create New Project</a>
-    </div>
-    <div (click)="editproj(prj.id)" *ngFor="let prj of dataservice.projects_array;"  class="relative group bg-gray-900 py-10 sm:py-20 px-4 flex flex-col space-y-2 items-center cursor-pointer rounded-md hover:bg-gray-900/80 hover:smooth-hover">
-      <img class="w-20 h-20 object-cover object-center rounded-full" src="https://healthitanalytics.com/images/site/article_headers/_normal/GettyImages-1132660268.jpg" alt="cuisine" />
-      <h4 class="text-white text-2xl font-bold capitalize text-center">{{prj.name}}</h4>
-      <p class="text-white/50">{{prj.description}}</p>
-      <p class="absolute top-2 text-white/20 inline-flex items-center text-xs">22 Online <span class="ml-2 w-2 h-2 block bg-green-500 rounded-full group-hover:animate-pulse"></span></p>
-    </div>
-    
-  </div>
- </div>

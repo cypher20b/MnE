@@ -11,9 +11,15 @@ export class SignupComponent {
 
   // On Signup link click
   onSignIn() {
-    this.router.navigate(['sign-in'], { relativeTo: this.route.parent });
+    this.router.navigate(['login'], { relativeTo: this.route.parent });
+    console.log('ihofs');
+    
   }
-
+  onSignup() {
+    this.router.navigate(['dashboard'], { relativeTo: this.route.parent });
+    console.log('ihofs');
+    
+  }
   ngOnInit(): void {
   }
 }

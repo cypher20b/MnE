@@ -1,5 +1,43 @@
 
-<!-- component -->
-<div class="min-h-screen flex items-center justify-center">
-  <span>under development...</span>
+
+<div class="">
+   <div style="padding-top: 58px;">
+    <div >
+      <div class="">
+        <ul class=>
+          <li>
+              <a [routerLink]="['/dashboard']">
+                  <span >Dashboard</span>
+              </a>
+          </li>
+          <li>
+              <a [routerLink]="['/proj']">
+                  <span >Projects</span>
+              </a>
+          </li>
+          <li>
+              <a>
+                  <span >Notes</span>
+              </a>
+          </li>
+       
+          <li>
+            <a>
+                <span >User's Guide</span>
+            </a>
+          </li>
+          <li class="">
+            <a >
+              <span >Notifications</span>
+              <span>1.2k</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+  <div style="overflow-y: scroll; padding-top: 5px;">
+      <router-outlet></router-outlet>
   </div>
+  </div>
+</div>

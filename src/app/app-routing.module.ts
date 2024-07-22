@@ -20,9 +20,9 @@ const routes: Routes = [
   {path:'proj_detail/:id/analysis', component:ProjAnalyticsComponent},
   {path:'report', component:ReportComponent},
   {path:'model/:id', component:ModelFactoryComponent},
-  // {path:'**', redirectTo: '/proj', pathMatch: 'full'},
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
+  // {path:'**', redirectTo: '/login', pathMatch: 'full'},
 
 ];
 

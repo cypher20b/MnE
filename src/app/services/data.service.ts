@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
+import { ProjectModel } from '../models/project.model';
+import { Project } from '../interfaces/project';
+import { SurveyModel } from '../models/survey.model';
+import { OfferedAnswers } from '../components/survey/myModel';
 
 @Injectable({
   providedIn: 'root'
@@ -9,28 +13,28 @@ export class DataService {
   proj_loaded = false;
   surveys:any
   surveys_date:any
-  projects_array:any=[
-    // {name: 'test proj1', description:' grade 4 performance', data:[{name:'survey', questions:[{question_text:'', q_id:''}], calculations:''}]},
-    // {name: 'test proj1', description:'this is a proj for measuring students grade 4 performance', data:[{name:'survey', questions:[{question_text:'', q_id:''}], calculations:''}]},
-    // {name: 'test proj1', description:'this is a proj for measuring students grade 4 performance', data:[{name:'survey', questions:[{question_text:'', q_id:''}], calculations:''}]},
+  currProject:Project={name:'',description:'',data:[]}
+  projectsArray:any=[
+    // {id:0,name: 'test proj1', description:' grade 4 performance', data:[{name:'survey', questions:[{question_text:'', q_id:''}], calculations:''}]},
+    // {id:1,name: 'test proj1', description:'this is a proj for measuring students grade 4 performance', data:[{name:'survey', questions:[{question_text:'', q_id:''}], calculations:''}]},
+    // {id:3,name: 'test proj1', description:'this is a proj for measuring students grade 4 performance', data:[{name:'survey', questions:[{question_text:'', q_id:''}], calculations:''}]},
   ] 
-  survey_data:any = {name:'', questions:[], calculations:[], reports:[]}
-  new_projects_array:any=
-    {name: '',createdAt:'',updatedAt:'', description:'', data:[]}
+  question:any = {text:'', type:'', offeredAnswers:[], reports:[]}
     // {name: '', description:'', data:[{model:{type:'', questions:[], calculations:''}}]}
-  
+  newProject = new ProjectModel('2','',[])
+  newSurvey = new SurveyModel('',[],[],[])
   constructor(private http: HttpClient, private apiservice: ApiService) { }
   updateProjArray(id:any){
-    this.projects_array=[]
-    console.log(this.surveys)
-  this.http.get(this.apiservice.pullData).subscribe((res:any)=>{
-    console.log(res)
-    for (let i = 0; i < res.length; i++) {
+    // this.projects_array=[]
+    // console.log(this.surveys)
+  // this.http.get(this.apiservice.pullData).subscribe((res:any)=>{
+  //   console.log(res)
+  //   for (let i = 0; i < res.length; i++) {
       
-      this.projects_array.push(res[i])
-      this.surveys = 0
-      if (res[i].data === null) {
-        res[i].data = []
+  //     this.projects_array.push(res[i])
+  //     this.surveys = 0
+  //     if (res[i].data === null) {
+  //       res[i].data = []
       // this.projects_array.push(res[i])
       // this.surveys = 0
       // console.log(this.projects_array)
@@ -67,11 +71,11 @@ export class DataService {
       //   // }
         
       // }
-    }
+    // }
     // this.projects_array = [...new Set(this.projects_array)]
-    console.log(this.surveys)
-    console.log(this.projects_array)
-  })
+    // console.log(this.surveys)
+    // console.log(this.projects_array)
+  // })
 
-  }
+  // }
 }

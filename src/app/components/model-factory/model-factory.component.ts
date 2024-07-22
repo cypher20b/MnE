@@ -31,7 +31,7 @@ indicator = {
 constructor(public dataservice:DataService,private apiservice:ApiService, private router:Router, private route: ActivatedRoute, private http:HttpClient){}
   create_new_item_monitor(){
     // this.router.navigate(['model'])
-    this.dataservice.new_projects_array.data.type='tracker'
+    // this.dataservice.new_projects_array.data.type='tracker'
     // console.log(this.dataservice.new_projects_array)
   }
 
@@ -45,28 +45,30 @@ constructor(public dataservice:DataService,private apiservice:ApiService, privat
     console.log(this.radio_with_textbox)
   }
   create_new_survey(){
-    this.dataservice.new_projects_array.data.type='survey'
-    console.log(this.dataservice.new_projects_array)
+    // this.dataservice.new_projects_array.data.type='survey'
+    // console.log(this.dataservice.new_projects_array)
     // this.router.navigate(['model'])
   }
 
   append_new_question(text:any){
+    console.log(text)
+    this.dataservice.newSurvey.update({questions:[text]})
     // this.dataservice.new_projects_array.data[0].model.questions.push({question_text:text, q_id:'', question_type:this.type, posible_answers:this.answers})
-    if (this.show_dropdown && this.dropdown_list) {
-      this.dropdown_list = this.dropdown_list.split(',')
-      this.dataservice.survey_data.questions.push({question_text:text, q_id:'', question_type:this.type, posible_answers:this.dropdown_list})
-      console.log(this.dataservice.survey_data)
-      this.answers = []
-      this.type='default'
-      this.input_question = ''   
-      this.dropdown_list = false
-    } else {
-      this.dataservice.survey_data.questions.push({question_text:text, q_id:'', question_type:this.type, posible_answers:this.answers})
-      console.log(this.dataservice.survey_data)
-      this.answers = []
-      this.type='default'
-      this.input_question = ''    
-    }
+    // if (this.show_dropdown && this.dropdown_list) {
+    //   this.dropdown_list = this.dropdown_list.split(',')
+    //   this.dataservice.survey_data.questions.push({question_text:text, q_id:'', question_type:this.type, posible_answers:this.dropdown_list})
+    //   console.log(this.dataservice.survey_data)
+    //   this.answers = []
+    //   this.type='default'
+    //   this.input_question = ''   
+    //   this.dropdown_list = false
+    // } else {
+    //   this.dataservice.survey_data.questions.push({question_text:text, q_id:'', question_type:this.type, posible_answers:this.answers})
+    //   console.log(this.dataservice.survey_data)
+    //   this.answers = []
+    //   this.type='default'
+    //   this.input_question = ''    
+    // }
 
   }
 
@@ -132,21 +134,21 @@ constructor(public dataservice:DataService,private apiservice:ApiService, privat
   }
 
   go_to_dashboard(){
-    console.log(this.route.snapshot.params['id'], this.dataservice.survey_data)
-    for (let i = 0; i < this.dataservice.projects_array.length; i++) {
-      if (this.dataservice.projects_array[i].id === Number(this.route.snapshot.params['id'])) {
-        console.log(this.dataservice.projects_array[i].data)
+    // console.log(this.route.snapshot.params['id'], this.dataservice.survey_data)
+    for (let i = 0; i < this.dataservice.projectsArray.length; i++) {
+      if (this.dataservice.projectsArray[i].id === Number(this.route.snapshot.params['id'])) {
+        console.log(this.dataservice.projectsArray[i].data)
         // let updatedSurveyList = this.dataservice.projects_array[i].data.push(this.dataservice.survey_data)
         console.log('///////////////////////////////////////////////')
         console.log('updatedSurveyList')
         console.log('///////////////////////////////////////////////')
         let dataToBeUpdated = []
-        dataToBeUpdated.push(this.dataservice.survey_data)
-        this.http.post(this.apiservice.updateproj, {name:this.dataservice.survey_data.name, data:JSON.stringify(dataToBeUpdated), id:this.dataservice.projects_array[i].id}).subscribe((res:any)=>{
-          console.log(res)
-          this.dataservice.updateProjArray(this.dataservice.projects_array[i].id)
-          this.router.navigate(['proj_detail', this.route.snapshot.params['id']])
-        })
+        // dataToBeUpdated.push(this.dataservice.survey_data)
+        // this.http.post(this.apiservice.updateproj, {name:this.dataservice.survey_data.name, data:JSON.stringify(dataToBeUpdated), id:this.dataservice.projects_array[i].id}).subscribe((res:any)=>{
+        //   console.log(res)
+        //   this.dataservice.updateProjArray(this.dataservice.projects_array[i].id)
+        //   this.router.navigate(['proj_detail', this.route.snapshot.params['id']])
+        // })
         // this.dataservice.projects_array[i].data.push(this.dataservice.survey_data)
       }
     }

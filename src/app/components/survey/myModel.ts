@@ -1,3 +1,5 @@
+import { AnswersFormat } from "src/app/interfaces/answer"
+
 export class OfferedAnswers {
     constructor(
         public description: string,
@@ -9,13 +11,13 @@ export class OfferedAnswers {
     constructor(
         public id: string,
         public number: number,
-        public name: any,
-        public description: any,
+        public name: string,
+        public description: string,
         public pageFlow: {
           nextPage: boolean,
           label: string
         },
-        public elements: Array<element>,
+        public elements: element[],
         public namedPage: boolean,
         public isFirst: boolean,
         public isLast: boolean
@@ -33,7 +35,7 @@ export class OfferedAnswers {
           type: string,
           required: boolean,
           pageFlowModifier: boolean
-          OfferedAnswers:Array<answersFormat>
+          OfferedAnswers:AnswersFormat[]
         }
         
     ){}
@@ -65,11 +67,3 @@ export class OfferedAnswers {
     ){}
   }
    
-  interface answersFormat {
-    id:string
-    orderNo:number
-    pageFlow:{
-      nextPage:boolean,
-      label:string
-    }
-  }

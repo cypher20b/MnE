@@ -63,13 +63,13 @@ export class SurveyFormComponent implements OnInit{
   ngOnInit(): void {
     // console.log(this.route.snapshot.params['id'])
     this.survey =(()=>{
-      for (let i = 0; i < this.dataservice.projects_array.length; i++) {
-        if (this.dataservice.projects_array[i].id === Number(this.route.snapshot.params['id'])) {
-          for (let j = 0; j < this.dataservice.projects_array[i].data.length; j++) {
-            console.log(this.dataservice.projects_array[i].data)
-            if (this.dataservice.projects_array[i].data[j].name === this.route.snapshot.params['name']) {
+      for (let i = 0; i < this.dataservice.projectsArray.length; i++) {
+        if (this.dataservice.projectsArray[i].id === Number(this.route.snapshot.params['id'])) {
+          for (let j = 0; j < this.dataservice.projectsArray[i].data.length; j++) {
+            console.log(this.dataservice.projectsArray[i].data)
+            if (this.dataservice.projectsArray[i].data[j].name === this.route.snapshot.params['name']) {
               console.log('seeeeee')
-              return this.dataservice.projects_array[i].data[j]
+              return this.dataservice.projectsArray[i].data[j]
               }
           }
         } else{
