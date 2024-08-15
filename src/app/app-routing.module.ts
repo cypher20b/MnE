@@ -14,7 +14,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 const routes: Routes = [
   {path:'survey', component:SurveyComponent},
   {path:'survey/:id/:name', component:SurveyFormComponent},
-  {path:'dashboard', component:DashboardComponent},
+  {path:'', component:DashboardComponent},
   {path:'proj', component:ProjFactoryComponent},
   {path:'proj_detail/:id', component:ProjDetailComponent},
   {path:'proj_detail/:id/analysis', component:ProjAnalyticsComponent},

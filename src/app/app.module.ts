@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SurveyComponent,QuestionDialog } from './components/survey/survey.component';
@@ -29,7 +28,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import {MatSliderModule} from '@angular/material/slider';
-
 import { ProjAnalyticsComponent } from './components/proj-analytics/proj-analytics.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';

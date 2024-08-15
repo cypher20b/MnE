@@ -35,42 +35,44 @@
             <!-- question model -->
             
             <!-- question list -->
-            <!-- <div *ngFor="let question of dataservice.survey_data.questions; let i=index;" class="form-check mb-3">
-                <label style="font-size: 30px;" class="form-check-label" for="flexCheckDefault">
-                 {{i+1}}. {{question.question_text}}
-                </label>
-                <div class="fs-6" [ngSwitch]="question.question_type">
-                  <div class="" *ngSwitchCase="'text'">
-                    <div class="posible_answers form-check">
-                      <small><i>please enter your answer here: </i></small> <input class="form-control" [type]="question.question_type">
-                    </div>
-                  </div>
-                  <div class="" *ngSwitchCase="'number'">
-                    <div style="padding-left: 1.5em;" class="">
-                      <small><i>please enter your answer here: </i></small> <input class="form-control" [type]="question.question_type">
-                    </div>
-                  </div>
-                  <div class="" *ngSwitchCase="'date'">
-                    <div class="posible_answers form-check">
-                      <small><i>please pick a date: </i></small> <input class="form-control" [type]="question.question_type">
-                    </div>
-                  </div>
-                  <div class="" *ngSwitchCase="'radio'">
-                    <mat-radio-button *ngFor="let choice of dataservice.survey_data.questions[i].posible_answers; let ans_i=index">{{choice}}</mat-radio-button>
-                  </div>
-                  <div class="" style="padding-left: 1.5em;" *ngSwitchCase="'checkbox'">
-                    <div class="posible_answers form-check" *ngFor="let choice of dataservice.survey_data.questions[i].posible_answers; let ans_i=index" >
-                      <input class="form-check-input" [type]="question.question_type"><label for="" class="form-check-label">{{choice}}</label>
-                    </div>
-                  </div>
-                  <div class="" style="padding-left: 1.5em;" *ngSwitchCase="'select'">
-                    <select class="form-select posible_answers" aria-label="Default select example">
-                      <option selected>choose one</option>
-                      <option *ngFor="let choice of dataservice.survey_data.questions[i].posible_answers; let ans_i=index" [value]="choice">{{choice}}</option>
-                    </select>
-                  </div>
-                </div>
-            </div> -->
+             <div *ngIf="this.dataservice.newSurvey.questions.length">
+               <div *ngFor="let question of this.dataservice.newSurvey.questions; let i=index;" class="form-check mb-3">
+                   <label style="font-size: 30px;" class="form-check-label" for="flexCheckDefault">
+                    {{i+1}}. {{question.text}}
+                   </label>
+                   <div class="fs-6" [ngSwitch]="question.type">
+                     <div class="" *ngSwitchCase="'text'">
+                       <div class="posible_answers form-check">
+                         <small><i>please enter your answer here: </i></small> <input class="form-control" [type]="question.type">
+                       </div>
+                     </div>
+                     <div class="" *ngSwitchCase="'number'">
+                       <div style="padding-left: 1.5em;" class="">
+                         <small><i>please enter your answer here: </i></small> <input class="form-control" [type]="question.type">
+                       </div>
+                     </div>
+                     <div class="" *ngSwitchCase="'date'">
+                       <div class="posible_answers form-check">
+                         <small><i>please pick a date: </i></small> <input class="form-control" [type]="question.type">
+                       </div>
+                     </div>
+                     <div class="" *ngSwitchCase="'radio'">
+                       <mat-radio-button *ngFor="let choice of question.offeredAnswers; let ans_i=index">{{choice}}</mat-radio-button>
+                     </div>
+                     <div class="" style="padding-left: 1.5em;" *ngSwitchCase="'checkbox'">
+                       <div class="posible_answers form-check" *ngFor="let choice of question.offeredAnswers; let ans_i=index" >
+                         <input class="form-check-input" [type]="question.type"><label for="" class="form-check-label">{{choice}}</label>
+                       </div>
+                     </div>
+                     <div class="" style="padding-left: 1.5em;" *ngSwitchCase="'select'">
+                       <select class="form-select posible_answers" aria-label="Default select example">
+                         <option selected>choose one</option>
+                         <option *ngFor="let choice of question.offeredAnswers; let ans_i=index" [value]="choice">{{choice}}</option>
+                       </select>
+                     </div>
+                   </div>
+               </div>
+             </div>
 
         </div>
 
@@ -116,8 +118,8 @@
       <div class="modal-body">
           
           <div class="input-group mb-3">
-            <input [(ngModel)]="dataservice.question.text" #question_text type="text" class="form-control" placeholder="Type your quetstion in here..." aria-label="Text input with dropdown button">
-            <select [(ngModel)]="dataservice.question.type" class="btn btn-secondary dropdown-toggle" id="inputGroupSelect01">
+            <input [(ngModel)]="dataservice.question.text" type="text" class="form-control" placeholder="Type your quetstion in here..." aria-label="Text input with dropdown button">
+            <select [(ngModel)]="type" (ngModelChange)="question_type()" class="btn btn-secondary dropdown-toggle" id="inputGroupSelect01">
               <option value="default" selected>---Type of Answer---</option>
               <option value="text">Text</option>
               <option value="number">number</option>
@@ -127,10 +129,11 @@
               <option value="select">dropdown list</option>
             </select>
           </div>
+          <input *ngIf="type === 'radio' || type==='checkbox' || type==='select'" [(ngModel)]="this.input_answer" (keydown.enter)="add_answer($event.target)" type="text" class="form-control"/>
           <hr>
           <div class="card-body">     
             <div *ngIf="show_select">
-              <div *ngFor="let answer of answers; let i=index;" class="form-check">
+              <div *ngFor="let answer of dataservice.question.offeredAnswers let i=index;" class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                   {{answer}}
@@ -140,28 +143,27 @@
             </div>
 
             <div *ngIf="show_dropdown">
-              <div class="form-floating">
-                <textarea [(ngModel)]="dropdown_list" class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-              </div>
-            </div>
-      
-            <div *ngIf="show_radio">
-              <div *ngFor="let answer of answers; let i=index;" class="form-check">
-                <!-- <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"> -->
+              <div *ngFor="let answer of dataservice.question.offeredAnswers let i=index;" class="form-check">
                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                 <label *ngIf="!radio_with_textbox" class="form-check-label" for="flexRadioDefault1">
                   {{answer}}
                 </label>
-                <!-- <label *ngIf="radio_with_textbox" class="form-check-label" for="flexRadioDefault1">
-                  {{answer.new_answer.new_answer}}tb
-                </label> -->
-                <!-- <input *ngIf="!answer.textbox" type="text" placeholder="tb" class="form-control"> -->
+                <button class="btn-close remove-btn" (click)="pop_option(i)" aria-label="Close"></button>
+              </div>
+            </div>
+      
+            <div *ngIf="show_radio">
+              <div *ngFor="let answer of dataservice.question.offeredAnswers let i=index;" class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                <label *ngIf="!radio_with_textbox" class="form-check-label" for="flexRadioDefault1">
+                  {{answer}}
+                </label>
                 <button class="btn-close remove-btn" (click)="pop_option(i)" aria-label="Close"></button>
               </div>
       </div>
       <div class="modal-footer">
         <button data-bs-dismiss="modal" class="btn btn-secondary" >Cancel</button>
-        <button [disabled]="!(dataservice.question.text.length && (type !== 'default'))" (click)="append_new_question(question_text.value)" data-bs-dismiss="modal"  class="btn btn-primary">add</button>
+        <button [disabled]="!(dataservice.question.text.length && type !== 'default')" (click)="append_new_question()" data-bs-dismiss="modal"  class="btn btn-primary">add</button>
       </div> 
     </div>
   </div>

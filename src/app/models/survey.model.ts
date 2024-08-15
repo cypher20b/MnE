@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Survey } from '../interfaces/survey';
+import { Survey, SurveyQuestion } from '../interfaces/survey';
 import { Question } from '../interfaces/question';
 
 export class SurveyModel implements Survey {
@@ -21,8 +21,8 @@ export class SurveyModel implements Survey {
       this.reports = reports;
     }
 
-    addQuestion(updatedData:any){
-      this.questions.push({id:uuidv4(), text:updatedData.text,type:updatedData.type,offeredAnswers:[]})
+    addQuestion(updatedData:SurveyQuestion){
+      this.questions.push({id:uuidv4(), text:updatedData.text,type:updatedData.type,offeredAnswers:updatedData.offeredAnswers||[]})
     }
   
     update(updatedData: Partial<Survey>) {

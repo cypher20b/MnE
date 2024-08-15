@@ -10,7 +10,7 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./model-factory.component.scss']
 })
 export class ModelFactoryComponent implements OnInit{
-answers:any=[]
+// answers:any=[]
 type = 'default'
 calc_array = 'default'
 radio_with_textbox:any = false
@@ -50,9 +50,12 @@ constructor(public dataservice:DataService,private apiservice:ApiService, privat
     // this.router.navigate(['model'])
   }
 
-  append_new_question(text:any){
-    console.log(text)
-    this.dataservice.newSurvey.update({questions:[text]})
+  append_new_question(){
+    // console.log(text)
+    // console.log(this.answers)
+    this.dataservice.newSurvey.addQuestion({text:this.dataservice.question.text,type:this.type,offeredAnswers:this.dataservice.question.offeredAnswers})
+    this.dataservice.question = {text:'', type:'', offeredAnswers:[], reports:[]}
+    console.log(this.dataservice.newSurvey)
     // this.dataservice.new_projects_array.data[0].model.questions.push({question_text:text, q_id:'', question_type:this.type, posible_answers:this.answers})
     // if (this.show_dropdown && this.dropdown_list) {
     //   this.dropdown_list = this.dropdown_list.split(',')
@@ -74,13 +77,14 @@ constructor(public dataservice:DataService,private apiservice:ApiService, privat
 
   add_answer_with_textbox(new_answer:any){
     console.log({new_answer, added_value:true})
-    this.answers.push({new_answer:new_answer, added_value:true})
+    this.dataservice.question.offeredAnswers.push({new_answer:new_answer, added_value:true})
     this.input_answer = ''
     this.radio_with_textbox = false
   }
 
   add_answer(new_answer:any){
-    this.answers.push(new_answer)
+    this.dataservice.question.offeredAnswers.push(this.input_answer)
+    // console.log(this.answers)
     this.input_answer= ''
   }
 
@@ -156,7 +160,8 @@ constructor(public dataservice:DataService,private apiservice:ApiService, privat
   }
 
   pop_option(option:any){
-    this.answers.pop(option)
+    this.dataservice.question.offeredAnswers.splice(option, 1)
+    // console.log(option)
   }
   append_new_calc(param: any){
 
@@ -202,7 +207,11 @@ constructor(public dataservice:DataService,private apiservice:ApiService, privat
     
   }
   ngOnInit(){
+    // this.dataservice.currProject.data?.push(this.dataservice.newSurvey)
     // this.dataservice.survey_data = {name:'', questions:[], calculations:[], reports:[]}
     // this.dataservice.new_projects_array ={name: '',createdAt:'',updatedAt:'', description:'', data:[]}
   }
 }
+
+
+

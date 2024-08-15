@@ -10,7 +10,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class ProjDetailComponent implements OnInit {
 
-selectedProjectId:number =0 
+// selectedProjectId:number =0 
 reports:any = 0
 calc:any = 0
 newSurvey={name:''}
@@ -26,7 +26,7 @@ temp_form(name:any){
   this.router.navigate(['survey', this.route.snapshot.params['id'], name])
 }
 ngOnInit(){
-  this.selectedProjectId = this.route.snapshot.params['id']
+  // this.selectedProjectId = this.route.snapshot.params['id']
   if (!this.dataService.currProject.name.length) {
     this.router.navigate(['proj'])
   }

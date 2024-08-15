@@ -7,9 +7,9 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
             <mat-menu xPosition="before" #menu="matMenu">
-              <button mat-menu-item>
+              <button id="user-menu-item-0" data-bs-toggle="modal" data-bs-target="#create_new_survey"  mat-menu-item>
                 <mat-icon fontIcon="home"></mat-icon>
-                <a data-bs-toggle="modal" data-bs-target="#create_new_survey" class="" role="menuitem" tabindex="-1" id="user-menu-item-0">create new</a>
+                <a class="" role="menuitem" tabindex="-1" >create new</a>
               </button>
               <button [matMenuTriggerFor]="surveys" mat-menu-item>
                 <mat-icon>edit</mat-icon>
