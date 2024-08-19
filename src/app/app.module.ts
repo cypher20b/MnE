@@ -33,6 +33,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SurveyFormComponent } from './components/survey-form/survey-form.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
     LoginComponent,
     SignupComponent,
     QuestionDialog,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
